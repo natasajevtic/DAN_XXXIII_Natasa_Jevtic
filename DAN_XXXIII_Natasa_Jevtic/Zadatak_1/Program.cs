@@ -59,14 +59,31 @@ namespace Zadatak_1
                 str1.WriteLine(item);
             }
             str1.Close();
-        }        
+        }
+        /// <summary>
+        /// This method reads rows of a matrix from a file and displays that on a console.
+        /// </summary>
         static void DisplayMatrix()
         {
-            
-        }        
+            string[] lines = File.ReadAllLines(@"../../FileByThread_1.txt");
+            foreach (var item in lines)
+            {
+                Console.WriteLine(item);
+            }
+        }
+        /// <summary>
+        /// This method reads numbers from a file and calculates their sum.
+        /// </summary>
         static void CalculateSumOfNumbers()
         {
-            
+            //Thread.Sleep(1000);
+            string[] lines = File.ReadAllLines(@"../../FileByThread_22.txt");
+            int sum = 0;
+            foreach (var item in lines)
+            {
+                sum += Int32.Parse(item);
+            }
+            Console.WriteLine("Sum:" + sum);
         }
         /// <summary>
         /// Creates four threads, sets their names, runs the first two, and after they executed their job, runs the second two.
@@ -103,6 +120,9 @@ namespace Zadatak_1
             stopWatch.Stop();
             TimeSpan ts = stopWatch.Elapsed;
             Console.WriteLine("Runtime of first two threads in miliseconds: {0} ", ts.Milliseconds);
+            threads[2].Start();
+            threads[3].Start();
+            Console.ReadKey();
         }
     }
 }
